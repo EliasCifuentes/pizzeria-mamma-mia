@@ -1,0 +1,12 @@
+.footer-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #212529;
+    color: white;
+    height: 15vh;
+}
+
+.text-footer {
+    font-size: 20px;
+}

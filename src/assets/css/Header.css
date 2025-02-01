@@ -1,0 +1,38 @@
+.header-section {
+
+    background-image: url(../img/Header.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 45vh;
+    position: relative;
+}
+
+.header-section::before{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.33);
+}
+
+p {
+    font-size: 20px;
+    font-weight: 600;
+    position: relative; 
+    z-index: 2; 
+    color: white;
+}
+
+.titulo {
+    color: white;
+    z-index: 2;
+}
+
+
+
