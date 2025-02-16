@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import '../assets/css/CardPizza.css'
 
-const CardPizza = ({ name, price, ingredients, img }) => {
+const CardPizza = ({ name, price, description, ingredients, img }) => {
   return (
     <div className="card col-12 col-md-6 col-lg-4 border p-2 mb-5">
       <img src={img} className="card-img-top" alt={name} />
@@ -9,11 +9,20 @@ const CardPizza = ({ name, price, ingredients, img }) => {
         <h5 className="card-title">{name}</h5>
       </div>
       <div className="card-body border p-3">
-        <h5 className="card-text text-center">Ingredientes:</h5>
+        <h5 className="card-text text-center">Descripcion:</h5>
         <div className="d-fex">
-          <p className="card-text text-size text-center">{ingredients}</p>
-        </div>
-        
+          <p className="card-text text-size text-center">{description}</p>
+        </div>  
+      </div>
+      <div className="card-body border p-3">
+        <h5 className="card-text text-center">Ingredientes:</h5>
+        <ul className="list-unstyled">
+          {ingredients.map((ingredient, index) => (
+            <li key={index} className="card-text text-size ">
+             🍕 {ingredient}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="card-body">
         <h5 className="card-text text-center mt-2 mb-4">Precio: ${price.toLocaleString("es-ES")}</h5>
@@ -32,6 +41,7 @@ CardPizza.propTypes = {
   price: PropTypes.number.isRequired, // price debe ser un número obligatorio
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired, // ingredients debe ser un array de strings obligatorio
   img: PropTypes.string.isRequired, // img debe ser un string obligatorio
+  description: PropTypes.string.isRequired // description es un string obliatorio
 };
 
 export default CardPizza;
