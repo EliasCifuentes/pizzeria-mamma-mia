@@ -1,6 +1,7 @@
 import { formatoMoneda } from "../utils/formatoNumeros";
 import tipoProp from 'prop-types';//para poder definir la validacion de prop
 
+
 const Navbar = ({token = false, total = 25000}) => {
 
   
@@ -44,7 +45,7 @@ const Navbar = ({token = false, total = 25000}) => {
       </ul>
     </div>
   </div>
-</nav> 
+</nav>  
   )
 }
 
