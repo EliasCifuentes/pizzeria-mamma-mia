@@ -4,10 +4,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom'
 import { formatoMoneda } from "../utils/formatoNumeros";
 import tipoProp from 'prop-types';//para poder definir la validacion de prop
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 
 
-const Navegation = ({token = true , total = 25000}) => {
+const Navegation = ({token = true}) => {
+  const {precioTotal} = useContext(CartContext);
+
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className='vw-100'>
       <Container className='w-100'>
@@ -30,7 +34,7 @@ const Navegation = ({token = true , total = 25000}) => {
           </Nav>
           <Nav>
             <Link to='/cart'className="text-info text-decoration-none ms-3 text-white">
-                🛒 Total $ {formatoMoneda(total)}
+                🛒 Total $ {formatoMoneda(precioTotal)}
             </Link>
           </Nav>
         </Navbar.Collapse>
@@ -41,7 +45,7 @@ const Navegation = ({token = true , total = 25000}) => {
 
 Navegation.propTypes = {
   token: tipoProp.bool,
-  total: tipoProp.number,
+  //total: tipoProp.number,
 };
 
 export default Navegation

@@ -1,9 +1,12 @@
 import Header from "../components/Header";
 //import CardPizza from "../components/CardPizza";
 //import { pizzas } from "../assets/js/pizzas";
-import { useEffect, useState} from "react";
+import { useContext, useEffect, useState} from "react";
+import {CartContext} from "../context/CartContext";
 
 const Home = () => {
+
+  const {addToCart} = useContext(CartContext);
 
   const [pizzas, setPizzas] = useState([]);
 
@@ -36,7 +39,7 @@ const Home = () => {
             </div>
             <div className="card-body border p-3">
               <h5 className="card-text text-center">Descripcion:</h5>
-              <div className="d-fex">
+              <div className="d-flex">
                 <p className="card-text text-size text-justify">{pizza.desc}</p>
               </div>  
             </div>
@@ -54,7 +57,7 @@ const Home = () => {
               <h5 className="card-text text-center mt-2 mb-4">Precio: ${pizza.price.toLocaleString("es-ES")}</h5>
               <div className="d-flex justify-content-between">
                 <button className="btn btn-outline-secondary">Ver más 👀</button>
-                <button className="btn btn-outline-dark">Añadir 🛒</button>
+                <button className="btn btn-outline-dark" onClick={() => addToCart(pizza)}>Añadir 🛒</button>
               </div>
             </div> 
           </div>

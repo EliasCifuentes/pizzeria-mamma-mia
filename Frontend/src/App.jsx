@@ -10,11 +10,14 @@ import Profile from "./page/Profile";
 import NotFound from "./page/NotFound";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
+import { CartProvider }  from "./context/CartContext";
+
 
 const App = () => {
   return (     
 <> 
   <BrowserRouter>
+    <CartProvider> 
     < Navegation />
     < Routes>
       <Route path="/" element= {<Home />}/>
@@ -25,6 +28,7 @@ const App = () => {
       <Route path="/profile" element= {<Profile />}/>
       <Route path="/*" element= {< NotFound />}/>
     </Routes>
+    </CartProvider>
   </BrowserRouter>
   { /* <Navbar /> */ }
   <Footer />
