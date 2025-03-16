@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom";
 
 const Pizza = () => {
 
     const [pizza, setPizza] = useState (null);
+    const {id} = useParams();
 
     useEffect(() => {
-        const getPizza = async (id = "p001") => {
+        const getPizza = async () => {
           try {
             const res = await fetch(`http://localhost:5000/api/pizzas/${id}`);
             const data = await res.json();
@@ -16,7 +18,7 @@ const Pizza = () => {
         };
     
         getPizza();
-      }, []);
+      }, [id]);
 
       // Muestra "Cargando..." mientras la pizza aún no está disponible
     if (!pizza) {

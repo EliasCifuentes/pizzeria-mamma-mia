@@ -3,6 +3,7 @@ import { validacionForm } from "../utils/validacionFormulario";
 import Swal from 'sweetalert2'
 
 const Login = () => {
+
 // Estados para los datos del formulario
     const [formulario, setFormulario] = useState({
         email: '',

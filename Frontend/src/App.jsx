@@ -8,28 +8,34 @@ import Cart from "./page/Cart";
 import Pizza from "./page/Pizza";
 import Profile from "./page/Profile";
 import NotFound from "./page/NotFound";
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { /*BrowserRouter,*/ Navigate, Route, Routes } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CartProvider }  from "./context/CartContext";
-
+//import { CartProvider }  from "./context/CartContext";
+import { UserContext /*, UserProvider*/ } from "./context/UserContext";
+import { useContext } from "react";
+import ProtectedRoute from "./context/ProtectedRoute";
 
 const App = () => {
+
+  const { token } = useContext(UserContext)
   return (     
 <> 
-  <BrowserRouter>
-    <CartProvider> 
+    {/*<BrowserRouter>
+    <UserProvider>
+    <CartProvider>*/}
     < Navegation />
     < Routes>
       <Route path="/" element= {<Home />}/>
-      <Route path="/register" element= {<Register />}/>
-      <Route path="/login" element= {<Login />}/>
-      <Route path="/cart" element= {<Cart />}/>
-      <Route path="/pizza/p001" element= {<Pizza />}/>
-      <Route path="/profile" element= {<Profile />}/>
+      <Route path="/login" element={ token ? <Navigate to={"/"}/> : <Login />} />
+      <Route path="/register" element={ token ? <Navigate to={"/"}/> : <Register />} />
+      <Route path="/cart" element= {<Cart />}/>7
+      <Route path="/pizza/:id" element= {<Pizza />}/>
+      <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
       <Route path="/*" element= {< NotFound />}/>
     </Routes>
-    </CartProvider>
-  </BrowserRouter>
+    {/*</CartProvider>
+    </UserProvider>
+  </BrowserRouter>*/}
   { /* <Navbar /> */ }
   <Footer />
 </>

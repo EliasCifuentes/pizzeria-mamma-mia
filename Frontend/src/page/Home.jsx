@@ -3,12 +3,13 @@ import Header from "../components/Header";
 //import { pizzas } from "../assets/js/pizzas";
 import { useContext, useEffect, useState} from "react";
 import {CartContext} from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
   const {addToCart} = useContext(CartContext);
-
   const [pizzas, setPizzas] = useState([]);
+  const navegate = useNavigate();
 
   useEffect(() => {
     const getPizzas = async () => {
@@ -56,7 +57,7 @@ const Home = () => {
            <div className="card-body">
               <h5 className="card-text text-center mt-2 mb-4">Precio: ${pizza.price.toLocaleString("es-ES")}</h5>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-outline-secondary">Ver más 👀</button>
+                <button className="btn btn-outline-secondary" onClick={() => navegate(`/pizza/${pizza.id}`)}>Ver más 👀</button>
                 <button className="btn btn-outline-dark" onClick={() => addToCart(pizza)}>Añadir 🛒</button>
               </div>
             </div> 

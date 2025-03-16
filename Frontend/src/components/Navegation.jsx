@@ -6,12 +6,13 @@ import { formatoMoneda } from "../utils/formatoNumeros";
 import tipoProp from 'prop-types';//para poder definir la validacion de prop
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { UserContext } from '../context/UserContext';
 
 
-
-const Navegation = ({token = true}) => {
+const Navegation = () => {
   const {precioTotal} = useContext(CartContext);
-
+  const { token, logout } = useContext(UserContext);
+  
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className='vw-100'>
       <Container className='w-100'>
@@ -23,12 +24,12 @@ const Navegation = ({token = true}) => {
             {token ? (
               <>
                 <Link to='/profile' className='text-decoration-none ms-3 text-white'> 🔓 Profile </Link>
-                <Link to='/logout' className='text-decoration-none ms-3 text-white'> 🔓 Logout </Link>
+                <Link to='/' className='text-decoration-none ms-3 text-white' onClick={logout}> 🔓 Logout </Link>
               </>
             ) : (
               <>
                 <Link to='/login' className='text-decoration-none ms-3 text-white'> 🔐 Login </Link>
-                <Link to='/register' className='text-decoration-none ms-3 text-white'> 🔐 Register </Link>
+                <Link to='/register' className='text-decoration-none ms-3 text-white' > 🔐 Register </Link>
               </>
             )}
           </Nav>
