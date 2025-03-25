@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { validacionForm } from "../utils/validacionFormulario";
 import Swal from 'sweetalert2'
+import { UserContext } from "../context/UserContext";
+
+//import axios from 'axios';
 
 const Login = () => {
 
-// Estados para los datos del formulario
+
+    const { auth } = useContext(UserContext)
     const [formulario, setFormulario] = useState({
         email: '',
         password: ''
     });
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         const { name, value } = e.target;
         setFormulario((prev) => ({
           ...prev,
@@ -18,19 +22,36 @@ const Login = () => {
         }));
       };
 
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         // Usar el objeto formulario para la validación
         const resultado = validacionForm.validacionLogin(formulario);
         
-        Swal.fire({
-            title: resultado.valido ? "Éxito" : "Error",
+        if (!resultado.valido) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
             text: resultado.mensaje,
-            icon: resultado.valido ? "success" : "error",
-            confirmButtonText: "Aceptar"
-        });
+          });
+          return;
+        }
     
-      };
+        const success = await auth (formulario.email, formulario.password);
+    
+        if (success) {
+          Swal.fire({
+          icon: "success",
+          title: "Sesion Iniciada"
+        })
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Email o contraseña incorrecta",
+          });
+        }
+        
+}
 
   return (
     <div className="container mt-5">

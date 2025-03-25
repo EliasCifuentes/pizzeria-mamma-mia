@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 
 const Cart = () => {
 
-  const { cart, removeFromCart, addToCart, precioTotal } = useContext(CartContext);
+  const { cart, removeFromCart, addToCart, precioTotal, realizarPedido } = useContext(CartContext);
   const {token} = useContext(UserContext);
   /*const [cart, setCart] = useState(
     pizzaCart.map(pizza => ({ ...pizza, count: pizza.count })) 
@@ -31,6 +31,8 @@ const Cart = () => {
   };
 
   //const precioTotal = cart.reduce((total, pizza) => total + pizza.price * pizza.count, 0);*/
+
+
 
   return (
 <div className="container mt-4 mb-4 text-center">
@@ -74,7 +76,7 @@ const Cart = () => {
   <h4 className="mt-4">Total: ${precioTotal.toLocaleString("es-ES")}</h4>
   { token ? (
     <div className="mt-3 d-flex justify-content-center">
-      <button className="btn btn-outline-dark">Pagar </button>
+      <button className="btn btn-outline-dark" onClick={realizarPedido}>Pagar </button>
     </div>
   ):(
     <div className="mt-3 d-flex justify-content-center">

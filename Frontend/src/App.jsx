@@ -36,7 +36,6 @@ const App = () => {
     {/*</CartProvider>
     </UserProvider>
   </BrowserRouter>*/}
-  { /* <Navbar /> */ }
   <Footer />
 </>
 

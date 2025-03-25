@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { validacionForm } from "../utils/validacionFormulario";
 import Swal from 'sweetalert2'
+import { UserContext } from "../context/UserContext";
 
 const Register = () => {
-  // Estados para los datos del formulario
+
+  const { register } = useContext (UserContext)
   const [formulario, setFormulario] = useState({
     email: "",
     password: "",
     confirmarPassword: "" 
   });
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormulario((prev) => ({
       ...prev,
@@ -18,18 +20,35 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Usar el objeto formulario para la validación
     const resultado = validacionForm.validacionRegistro(formulario);
     
-     Swal.fire({
-                title: resultado.valido ? "Éxito" : "Error",
-                text: resultado.mensaje,
-                icon: resultado.valido ? "success" : "error",
-                confirmButtonText: "Aceptar"
-            });
+    if(!resultado.valido){
+      Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: resultado.mensaje,
+      });
+      return
+    }
+     
+    const userRegister = await register (formulario.email, formulario.password)
 
+      if (userRegister) {
+              Swal.fire({
+              icon: "success",
+              title: "Tu cuenta ah sido registrada correctamente"
+            })
+            
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ocurrio un problema al crear el Registro",
+              });
+            }
   };
 
   return (

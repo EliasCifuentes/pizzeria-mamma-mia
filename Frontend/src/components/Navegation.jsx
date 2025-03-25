@@ -11,7 +11,7 @@ import { UserContext } from '../context/UserContext';
 
 const Navegation = () => {
   const {precioTotal} = useContext(CartContext);
-  const { token, logout } = useContext(UserContext);
+  const { token, logout, email } = useContext(UserContext);
   
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className='vw-100'>
@@ -24,7 +24,7 @@ const Navegation = () => {
             {token ? (
               <>
                 <Link to='/profile' className='text-decoration-none ms-3 text-white'> 🔓 Profile </Link>
-                <Link to='/' className='text-decoration-none ms-3 text-white' onClick={logout}> 🔓 Logout </Link>
+                <Link to = '/' className='text-decoration-none ms-3 text-white' onClick={logout}> 🔓 Logout </Link>
               </>
             ) : (
               <>
@@ -33,7 +33,8 @@ const Navegation = () => {
               </>
             )}
           </Nav>
-          <Nav>
+          <Nav className="d-flex justify-content-between align-items-center">
+            <p className="text-white m-0"> Bienvenido: {email}</p>
             <Link to='/cart'className="text-info text-decoration-none ms-3 text-white">
                 🛒 Total $ {formatoMoneda(precioTotal)}
             </Link>
