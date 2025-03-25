@@ -1,4 +1,4 @@
-Cree 2 correos de prueba para el registro
+A parte del correo que esta por defecto en al backend, para probar registro agregue 2 correos mas:
 
     "email": "elias@test.com",
     "password": "123456",
